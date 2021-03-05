@@ -15,12 +15,12 @@ abstract class Widget
 
 		$appInstance = Application::getInstance();
 
-		$widgetPath = str_replace('/', '\\', str_replace($appInstance->getAppRootPath(), '', $appInstance->getWidgetPath())) . '\\' . lcfirst($widgetName);;
+		$widgetNameSpace = str_replace("/", "\\", str_replace($appInstance->getAppRootPath(), '', $appInstance->getWidgetPath())) . "\\" . lcfirst($widgetName);
 
-		$widgetClassName = $widgetPath . '\\' . $widgetName;
+		$widgetClassName = $widgetNameSpace . "\\" . $widgetName;
 
 		$widget = new $widgetClassName($data);
-		$widget->viewPath  = $widgetPath . "/views/";
+		$widget->viewPath  = $appInstance->getAppRootPath() . $widgetNameSpace . "/views/";
 
 		foreach($data as $key=>$value){
 			$widget->$key = $value;
